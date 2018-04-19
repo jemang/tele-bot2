@@ -1,9 +1,9 @@
 require 'rubygems'
 require 'telegram/bot'
 
-token = '555210897:AAGW4L1TyDQYZfDpzzLoLC0ILvQhzmhx154'
+secret = JSON.load(File.read('config/token.rb'))
 
-Telegram::Bot::Client.run(token) do |bot|
+Telegram::Bot::Client.run(secret['Token']) do |bot|
   bot.listen do |message|
     case message.text
     when '/start'

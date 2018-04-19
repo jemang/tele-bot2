@@ -1,15 +1,12 @@
 require 'rubygems'
 require 'telegram/bot'
 
-token = '555210897:AAGW4L1TyDQYZfDpzzLoLC0ILvQhzmhx154'
-chat = []
-Telegram::Bot::Client.run(token) do |bot|
+secret = JSON.load(File.read('config/token.rb'))
+
+Telegram::Bot::Client.run(secret['Token']) do |bot|
 	myip = %x[curl http://ip.42.pl/raw]
-	msg = "Your server is rebooting.\nNew ip address is :" + myip + "\n"
+	msg = "Your server is rebooting.\nNew ip address is : " + myip + "\n"
 	
-	# chat_id = 127839460
-	chat = ['163009424', '127839460']
-	chat.each do |chat_id|
-		bot.api.send_message(chat_id: chat_id.to_i, text: msg)
-	end
+	chat_id = 127839468
+	bot.api.send_message(chat_id: chat_id, text: msg)
 end
